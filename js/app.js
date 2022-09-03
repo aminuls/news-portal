@@ -139,8 +139,8 @@ const cardShow = (data) => {
    <div class="modal-box relative w-11/12 max-w-5xl">
       <label for="my-modal-6" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
       <div>
-         <figure class="col-span-12 md:col-span-4 p-0"><img class="min-h-full min-w-full rounded-lg" src=${image} alt="Movie" /></figure>
-         <div class="card-body col-span-12 md:col-span-8 p-2">
+         <figure class="col-span-12 md:col-span-4 p-0 md:p-3"><img class="min-h-full min-w-full rounded-lg" src=${image} alt="Movie" /></figure>
+         <div class="card-body col-span-12 md:col-span-8 p-2 md:p-8">
             <h2 class="card-title font-bold">${title ?? "No Title Found"}</h2>
             <p class="font-medium text-gray-600">${details}</p>
             <div class="card-actions justify-between items-center gap-5 pt-5">
