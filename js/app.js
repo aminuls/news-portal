@@ -13,6 +13,15 @@ const navUl = () => {
 };
 navUl();
 
+const isLoading = (data) => {
+   const loader = document.getElementById("loader");
+   if (data) {
+      loader.classList.remove("hidden");
+   } else {
+      loader.classList.add("hidden");
+   }
+};
+
 const categoryFetch = async () => {
    const url = `https://openapi.programming-hero.com/api/news/categories`;
    const res = await fetch(url);
@@ -34,6 +43,7 @@ categoryFetch();
 
 // return async be careful!
 const categoryPage = async (data) => {
+   isLoading(true);
    const url = ` https://openapi.programming-hero.com/api/news/category/0${data}`;
    const res = await fetch(url);
    const info = await res.json();
@@ -45,9 +55,18 @@ const categoryCards = async (data) => {
    const info = await categoryPage(data);
    const itemFound = document.getElementById("item-found");
    itemFound.innerText = `${info.length > 1 ? info.length + " items found" : "No Data Found"}`;
-   console.log(info.length);
+   // console.log(info.length);
+   if (info.length < 1) {
+      console.log("yes");
+      const categoryCard = document.getElementById("category-card");
+      const div = document.createElement("div");
+      div.innerHTML = `
+      <h3 class="text-center text-3xl font-bold text-red-600">No News Found in this page!</h3>
+      `;
+      categoryCard.appendChild(div);
+   }
    info.forEach((single) => {
-      console.log(single);
+      // console.log(single);
       // author ---> name, img, published_date
       const { author, details, title, total_view, image_url: image, _id: id } = single;
       const categoryCard = document.getElementById("category-card");
@@ -85,17 +104,19 @@ const categoryCards = async (data) => {
                   <i class="fa-solid fa-star-half-stroke"></i>
                </div>
                <div>
-                  <label for="my-modal-6" class="btn modal-button btn-active btn-ghost hover:bg-stone-400 font-bold" onclick="cardDetails('${id}')">Button</label>
+                  <label for="my-modal-6" class="btn modal-button btn-active btn-ghost hover:bg-stone-400 font-bold" onclick="cardDetails('${id}')">View More</label>
                </div>
             </div>
          </div>
-`;
+      `;
       categoryCard.appendChild(div);
    });
+   isLoading(false);
 };
 categoryCards("8");
 
 const cardDetails = (data) => {
+   isLoading(true);
    const url = `https://openapi.programming-hero.com/api/news/${data}`;
    fetch(url)
       .then((res) => res.json())
@@ -146,4 +167,5 @@ const cardShow = (data) => {
       </div>
    </div>
    `;
+   isLoading(false);
 };
