@@ -65,12 +65,14 @@ const categoryCards = async (data) => {
       `;
       categoryCard.appendChild(div);
    }
+   info.sort(function(a, b){return b.total_view - a.total_view});
    info.forEach((single) => {
       // console.log(single);
       // author ---> name, img, published_date
       const { author, details, title, total_view, image_url: image, _id: id } = single;
       const categoryCard = document.getElementById("category-card");
       const div = document.createElement("div");
+      // console.log(total_view);
       div.classList.add("card", "card-side", "shadow-lg", "drop-shadow-xl", "rounded-md", "grid", "grid-cols-12", "mb-2");
 
       div.innerHTML = `
