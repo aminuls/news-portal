@@ -49,46 +49,51 @@
                </div>
             </div>
          </div>
-         <!-- Category bar -->
-         <div class="navbar border-t-2">
-            <div class="flex-1 justify-center">
-               <ul class="menu menu-horizontal lg:gap-8 font-sans font-semibold flex-wrap justify-center p-0" id="category-ul"></ul>
-            </div>
-         </div>
       </header>
-      <main class="mb-14">
-         <!-- sort section -->
+      <main class="my-20">
          <section class="flex flex-col gap-4">
-            <div class="h-14 flex items-center bg-orange-100 rounded-md">
-               <h3 class="text-xl font-semibold m-4" id="item-found">4 items found</h3>
-            </div>
-            <div class="flex h-14 justify-center md:justify-between flex-wrap">
-               <div class="flex gap-3 items-center">
-                  <label for="sort" class="font-semibold text-lg">Sort By View:</label>
-                  <select id="sort" class="select lg:w-1/6 max-w-xs" disabled>
-                     <option>Default</option>
-                  </select>
+            <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-md">
+               <div class="collapse-title text-xl font-medium">Describe the differences among var, let and const.</div>
+               <div class="collapse-content">
+                  <p>
+                     The scope of a var variable is functional scope. The scope of a let variable is block scope. The scope of a const variable is block scope. It can be updated and re-declared in their own scope. The var variables can be updated and
+                     re-declared within its scope; let variables can be updated but not re-declared; const variables can neither be updated nor re-declared. They are all hoisted to the top of their scope.
+                  </p>
                </div>
-               <div class="flex gap-3">
-                  <div>
-                     <button class="btn btn-primary rounded-md px-8 font-medium text-base">Today's Pick</button>
-                  </div>
-                  <div>
-                     <button class="btn btn-outline btn-secondary rounded-md px-8 font-medium text-base">Trending</button>
-                  </div>
+            </div>
+            <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-md">
+               <div class="collapse-title text-xl font-medium">Describe the differences between arrow function and regular function.</div>
+               <div class="collapse-content">
+                  <p>
+                     While both regular and arrow functions work in a similar manner, yet there are certain interesting differences between them : <br />1. Unlike regular functions, arrow functions do not have their own 'this' keyword. <br />2.
+                     Arguments objects are not available in arrow functions, but are available in regular functions. <br />3. Regular functions are 'constructible' and 'callable'. The arrow functions are only 'callable' but not constructible.
+                     <br />4. Regular functions can be called using the 'new' keyword. But we will get a run-time error on trying to construct a non-constructible arrow functions using the new keyword.
+                  </p>
+               </div>
+            </div>
+            <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-md">
+               <div class="collapse-title text-xl font-medium">Describe the differences among map(), forEach(), filter(), find().</div>
+               <div class="collapse-content">
+                  <p>
+                     .forEach() is used to execute the same code on every element in an array but does not change the array and it returns undefined. <br />.map() executes the same code on every element in an array and returns a new array with the
+                     updated elements. <br />.filter() checks every element in an array to see if it meets a certain criteria and returns a new array with the elements that return truthy for the criteria. <br />.find() is like filter() but it checks
+                     the elements only untill it finds the first value under that particular criteria. After meeting that value it immediately stops the operation and returns the single value.
+                  </p>
+               </div>
+            </div>
+            <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-md">
+               <div class="collapse-title text-xl font-medium">Why should you use 'Templete String' ?</div>
+               <div class="collapse-content">
+                  <p>
+                     Template string is a powerful feature of modern JavaScript released in ES6. It lets us insert variables and expressions into strings without needing to concatenate like in older versions of JavaScript. It allows us to create
+                     strings that are complex and contain dynamic elements.
+                  </p>
                </div>
             </div>
          </section>
-         <!-- Card -->
-         <section class="mt-10" id="category-card"></section>
-         <!-- modal -->
-         <section>
-            <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-            <div class="modal modal-bottom sm:modal-middle" id="card-modal"></div>
-         </section>
-         <section class="flex justify-center">
+         <!-- <section class="flex justify-center">
             <progress class="progress w-56 fixed top-1/2 hidden" id="loader"></progress>
-         </section>
+         </section> -->
       </main>
       <footer class="footer footer-center p-10 bg-transparent text-dark-content">
          <div>

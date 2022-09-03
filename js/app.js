@@ -3,10 +3,12 @@ const navUl = () => {
    const navItems = ["News", "Blog", "About", "Terms"];
    for (let i = 0; i < ul.length; i++) {
       navItems.forEach((navItem) => {
+         const href = ["index.html","blog.html","#","#"];
          const li = document.createElement("li");
          li.innerHTML = `
-            <a>${navItem}</a>
+            <a href="${href[navItems.indexOf(navItem)]}">${navItem}</a>
          `;
+         console.log();
          ul[i].appendChild(li);
       });
    }
