@@ -9,6 +9,7 @@
       <!-- Tailwind Daisy UI -->
       <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
       <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://kit.fontawesome.com/8e26e05ccd.js" crossorigin="anonymous"></script>
    </head>
    <body class="container mx-auto">
       <header>
@@ -21,7 +22,9 @@
                   </label>
                   <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-md w-52 bg-base-100 nav-ul"></ul>
                </div>
-               <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+               <a class="btn btn-ghost normal-case text-xl"
+                  ><p class="font-bold">The <i class="font-serif text-orange-600">Samagra</i> News</p></a
+               >
             </div>
             <div class="flex-none gap-2">
                <div class="hidden lg:flex">
@@ -72,12 +75,21 @@
             </div>
          </section>
          <!-- Card -->
-         <section class="mt-10" id="category-card">
-            
-               
+         <section class="mt-10" id="category-card"></section>
+         <!-- modal -->
+         <section>
+            <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+            <div class="modal modal-bottom sm:modal-middle" id="card-modal">
             </div>
          </section>
       </main>
       <script src="./js/app.js"></script>
    </body>
 </html>
+
+<!-- 
+   sort
+   card link
+   footer
+   spinner
+ -->

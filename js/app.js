@@ -37,6 +37,8 @@ const categoryPage = async (data) => {
    const url = ` https://openapi.programming-hero.com/api/news/category/0${data}`;
    const res = await fetch(url);
    const info = await res.json();
+   const categoryCard = document.getElementById("category-card");
+   categoryCard.innerHTML = ``;
    return info.data;
 };
 const categoryCards = async (data) => {
@@ -50,31 +52,41 @@ const categoryCards = async (data) => {
       const { author, details, title, total_view, image_url: image, _id: id } = single;
       const categoryCard = document.getElementById("category-card");
       const div = document.createElement("div");
-      div.classList.add("card", "card-side", "shadow-lg", "drop-shadow-xl", "rounded-md", "grid", "grid-cols-12");
+      div.classList.add("card", "card-side", "shadow-lg", "drop-shadow-xl", "rounded-md", "grid", "grid-cols-12", "mb-2");
 
       div.innerHTML = `
          <figure class="col-span-12 md:col-span-4 p-3"><img class="min-h-full min-w-full rounded-lg" src=${image} alt="Movie" /></figure>
          <div class="card-body col-span-12 md:col-span-8">
-            <h2 class="card-title">${title}</h2>
-            <p>${details.slice(0,450)+"....."}</p>
-            <div class="card-actions justify-between gap-2 pt-4">
+            <h2 class="card-title font-bold">${title ?? "No Title Found"}</h2>
+            <p class="font-medium text-gray-600">${details.slice(0, 300) + "....."}</p>
+            <div class="card-actions justify-between items-center gap-5 pt-5">
                <div class="flex gap-4 items-center">
                   <div class="avatar">
                      <div class="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <img src=${image} />
                      </div>
                   </div>
-                  <div>
-                     <p>${(author?.name??"No name found").toUpperCase()}</p>
-                     <p>${author?.published_date??"No date found".toUpperCase()}</p>
+                  <div class="font-bold">
+                     <p>${(author?.name ?? "No name found").toUpperCase()}</p>
+                     <p>${author.published_date ? author.published_date.slice(0, 11) : "No date found"}</p>
                   </div>
                </div>
-               <div>
-                  <div></div>
-                  <div><p>${total_view}</p></div>
+               <div class="flex gap-4 items-center font-bold">
+                  <div class="text-2xl">
+                     <i class="fa-regular fa-eye"></i>
+                  </div>
+                  <div><p>${total_view ?? "No data found"}</p></div>
                </div>
-               <div>♣♥♣♣♣♣♣♣♣</div>
-               <div>♠◙ÜÜπ</div>
+               <div class="text-orange-600">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+               </div>
+               <div>
+                  <label for="my-modal-6" class="btn modal-button btn-active btn-ghost hover:bg-stone-400 font-bold" onclick="cardDetails('${id}')">Button</label>
+               </div>
             </div>
          </div>
 `;
@@ -82,3 +94,56 @@ const categoryCards = async (data) => {
    });
 };
 categoryCards("8");
+
+const cardDetails = (data) => {
+   const url = `https://openapi.programming-hero.com/api/news/${data}`;
+   fetch(url)
+      .then((res) => res.json())
+      .then((info) => cardShow(info.data[0]));
+   const modal = document.getElementById("card-modal");
+   modal.innerHTML = ``;
+};
+
+const cardShow = (data) => {
+   const { author, details, title, total_view, image_url: image, _id: id } = data;
+   console.log(data);
+   const modal = document.getElementById("card-modal");
+   modal.innerHTML = `
+   <div class="modal-box relative w-11/12 max-w-5xl">
+      <label for="my-modal-6" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <div>
+         <figure class="col-span-12 md:col-span-4 p-3"><img class="min-h-full min-w-full rounded-lg" src=${image} alt="Movie" /></figure>
+         <div class="card-body col-span-12 md:col-span-8">
+            <h2 class="card-title font-bold">${title ?? "No Title Found"}</h2>
+            <p class="font-medium text-gray-600">${details}</p>
+            <div class="card-actions justify-between items-center gap-5 pt-5">
+               <div class="text-orange-600">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+               </div>
+               <div class="flex gap-4 items-center">
+                  <div class="avatar">
+                     <div class="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src=${image} />
+                     </div>
+                  </div>
+                  <div class="font-bold">
+                     <p>${(author?.name ?? "No name found").toUpperCase()}</p>
+                     <p>${author.published_date ? author.published_date : "No date found"}</p>
+                  </div>
+               </div>
+               <div class="flex gap-4 items-center font-bold">
+                  <div class="text-2xl">
+                     <i class="fa-regular fa-eye"></i>
+                  </div>
+                  <div><p>${total_view ?? "No data found"}</p></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   `;
+};
