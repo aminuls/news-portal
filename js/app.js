@@ -3,7 +3,7 @@ const navUl = () => {
    const navItems = ["News", "Blog", "About", "Terms"];
    for (let i = 0; i < ul.length; i++) {
       navItems.forEach((navItem) => {
-         const href = ["index.html","blog.html","#","#"];
+         const href = ["index.html", "blog.html", "#", "#"];
          const li = document.createElement("li");
          li.innerHTML = `
             <a href="${href[navItems.indexOf(navItem)]}">${navItem}</a>
@@ -67,7 +67,9 @@ const categoryCards = async (data) => {
       `;
       categoryCard.appendChild(div);
    }
-   info.sort(function(a, b){return b.total_view - a.total_view});
+   info.sort(function (a, b) {
+      return b.total_view - a.total_view;
+   });
    info.forEach((single) => {
       // console.log(single);
       // author ---> name, img, published_date
