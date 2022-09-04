@@ -8,7 +8,7 @@ const navUl = () => {
          li.innerHTML = `
             <a href="${href[navItems.indexOf(navItem)]}">${navItem}</a>
          `;
-         console.log();
+         // console.log();
          ul[i].appendChild(li);
       });
    }
@@ -25,10 +25,14 @@ const isLoading = (data) => {
 };
 
 const categoryFetch = async () => {
-   const url = `https://openapi.programming-hero.com/api/news/categories`;
-   const res = await fetch(url);
-   const info = await res.json();
-   categoryShow(info.data.news_category);
+   try {
+      const url = `https://openapi.programming-hero.com/api/news/categories`;
+      const res = await fetch(url);
+      const info = await res.json();
+      categoryShow(info.data.news_category);
+   } catch (error) {
+      console.log(error);
+   }
 };
 const categoryShow = (data) => {
    const aCategory = [{ category_id: "08", category_name: "Home" }, ...data];
@@ -46,12 +50,16 @@ categoryFetch();
 // return async be careful!
 const categoryPage = async (data) => {
    isLoading(true);
-   const url = ` https://openapi.programming-hero.com/api/news/category/0${data}`;
-   const res = await fetch(url);
-   const info = await res.json();
-   const categoryCard = document.getElementById("category-card");
-   categoryCard.innerHTML = ``;
-   return info.data;
+   try {
+      const url = ` https://openapi.programming-hero.com/api/news/category/0${data}`;
+      const res = await fetch(url);
+      const info = await res.json();
+      const categoryCard = document.getElementById("category-card");
+      categoryCard.innerHTML = ``;
+      return info.data;
+   } catch (error) {
+      console.log(error);
+   }
 };
 const categoryCards = async (data) => {
    const info = await categoryPage(data);
@@ -59,7 +67,7 @@ const categoryCards = async (data) => {
    itemFound.innerText = `${info.length > 1 ? info.length + " items found" : "No Data Found"}`;
    // console.log(info.length);
    if (info.length < 1) {
-      console.log("yes");
+      // console.log("yes");
       const categoryCard = document.getElementById("category-card");
       const div = document.createElement("div");
       div.innerHTML = `
@@ -119,21 +127,22 @@ const categoryCards = async (data) => {
    });
    isLoading(false);
 };
-categoryCards("8");
+categoryCards("12");
 
 const cardDetails = (data) => {
    isLoading(true);
    const url = `https://openapi.programming-hero.com/api/news/${data}`;
    fetch(url)
       .then((res) => res.json())
-      .then((info) => cardShow(info.data[0]));
+      .then((info) => cardShow(info.data[0]))
+      .catch((error) => console.log(error));
    const modal = document.getElementById("card-modal");
    modal.innerHTML = ``;
 };
 
 const cardShow = (data) => {
    const { author, details, title, total_view, image_url: image, _id: id } = data;
-   console.log(data);
+   // console.log(data);
    const modal = document.getElementById("card-modal");
    modal.innerHTML = `
    <div class="modal-box relative w-11/12 max-w-5xl">
