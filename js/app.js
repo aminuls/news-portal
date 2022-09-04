@@ -127,7 +127,7 @@ const categoryCards = async (data) => {
    });
    isLoading(false);
 };
-categoryCards("12");
+categoryCards("8");
 
 const cardDetails = (data) => {
    isLoading(true);
